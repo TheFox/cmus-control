@@ -1,6 +1,6 @@
 # Cmus Control
 
-Control [cmus](https://cmus.github.io/) with Media Keys under [OS X](https://en.wikipedia.org/wiki/OS_X).
+Control [cmus](https://cmus.github.io/) with Media Keys :rewind: :arrow_forward: :fast_forward: under [OS X](https://en.wikipedia.org/wiki/OS_X).
 
 ## Install
 
