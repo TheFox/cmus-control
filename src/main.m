@@ -10,23 +10,27 @@ int main(int argc, const char *argv[]){
 	@autoreleasepool{
 		
 #ifdef PROJECT_USE_PID_FILE
-		NSString* processName = [[NSProcessInfo processInfo] processName];
-		DLog(@"name: '%@'", processName);
+		DLog(@"with PROJECT_USE_PID_FILE");
 		
-		NSMutableString* pidFilePath = [[NSMutableString alloc] initWithString:@"/var/run/"];
-		[pidFilePath appendFormat:@"%@.pid", processName];
+		NSProcessInfo* pInfo = [NSProcessInfo processInfo];
+		NSString* processName = [pInfo processName];
+		int processId = [pInfo processIdentifier];
+		NSString* processIdStr = [[NSString alloc] initWithFormat:@"%d", processId];
 		
-		NSFileManager *filemgr = [NSFileManager defaultManager];
-		if([filemgr isWritableFileAtPath:pidFilePath]){
-			NSFileHandle *pidFileH = [NSFileHandle fileHandleForWritingAtPath:pidFilePath];
-			if(pidFileH){
-				
-				[pidFileH closeFile];
-			}
+		NSString* pidFileDir = @"/var/run";
+		// NSString* pidFileDir = @"/tmp";
+		NSString* pidFilePath = [[NSString alloc] initWithFormat:@"%@/%@.pid", pidFileDir, processName];
+		
+		NSFileManager* filemgr = [NSFileManager defaultManager];
+		if([filemgr isWritableFileAtPath:pidFileDir]){
+			NSError* error = nil;
+			[processIdStr writeToFile:pidFilePath atomically:YES encoding:NSUTF8StringEncoding error:&error];
 		}
 		else{
-			DLog(@"WARNING: Can't write in /var/run");
+			DLog(@"WARNING: Can't write in %@", pidFileDir);
 		}
+#else
+		DLog(@"no PROJECT_USE_PID_FILE");
 #endif
 		
 		// CCAppDelegate* delegate = [CCAppDelegate new];
