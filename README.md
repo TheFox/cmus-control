@@ -4,7 +4,7 @@ Control [cmus](https://cmus.github.io/) with Media Keys :rewind: :arrow_forward:
 
 ## Install
 
-Since Cmus Control doesn't have the behavior of changing any foreign processes it's highly recommended to deactivate the *Remote Control Daemon*.
+Since Cmus Control doesn't have the behavior of changing any foreign processes it's highly recommended to [deactivate the *Remote Control Daemon*](http://blog.fox21.at/2015/11/20/control-cmus-with-media-keys.html).
 
 1. Run `make` to compile *Cmus Control Daemon*.
 2. Run `make install` to install `cmuscontrold` under `/usr/local/bin` path.
