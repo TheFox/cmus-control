@@ -4,11 +4,11 @@ Control [cmus](https://cmus.github.io/) with Media Keys :rewind: :arrow_forward:
 
 ## Install
 
-It's recommended to deactivate *Remote Control Daemon* to use *Cmus Control Daemon*.
+Since Cmus Control doesn't have the behavior of changing any foreign processes it's highly recommended to deactivate the *Remote Control Daemon*.
 
 1. Run `make` to compile *Cmus Control Daemon*.
 2. Run `make install` to install `cmuscontrold` under `/usr/local/bin` path.
-	A [launchd.plist](https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man5/launchd.plist.5.html) file named `at.fox21.cmuscontrold.plist` will be created under `/Library/LaunchAgents` to start *Cmus Control Daemon* on login.
+	A [launchd.plist](https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man5/launchd.plist.5.html) file named `at.fox21.cmuscontrold.plist` will be created under `/Library/LaunchAgents` to start *Cmus Control Daemon* automatically on login.
 
 ## Uninstall
 
