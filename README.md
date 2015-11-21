@@ -18,6 +18,16 @@ Just run `make uninstall`. Doing so
 - `/Library/LaunchAgents/at.fox21.cmuscontrold.plist` will be removed;
 - `/usr/local/bin/cmuscontrold` will be removed.
 
+## Load/Unload
+
+After a successful installation the `cmuscontrold` is loaded/started automatically with `launchctl`. You can unload the daemon manually:
+
+	make controld_unload
+	
+Or load it manually:
+
+	make controld_load
+
 ## License
 Copyright (C) 2015 Christian Mayer <http://fox21.at>
 
