@@ -28,6 +28,15 @@ Or load it manually:
 
 	make controld_load
 
+## Re-build
+
+After changing the source code you might want to re-build the binary and re-install it.
+
+1. `make controld_unload`
+2. `make -C build/release/target_10.10`
+	**Note**: `10.10` means OS X 10.10 target. For example, on OS X 10.9 you need to use `build/release/target_10.9` and so on.
+3. `make install`
+
 ## License
 Copyright (C) 2015 Christian Mayer <http://fox21.at>
 
