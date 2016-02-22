@@ -38,6 +38,30 @@ After changing the source code you might want to re-build the binary and re-inst
 	**Note**: `10.10` means OS X 10.10 target. For example, on OS X 10.9 you need to use `build/release/target_10.9` and so on.
 3. `make install`
 
+## Build under various versions of OS X
+
+You can either edit the `Makefile` file or set the environment variable to a different version of OS X.
+
+### Build under OS X 10.8 (Mountain Lion)
+
+	TARGET=10.8 make
+	TARGET=10.8 make install
+
+### Build under OS X 10.9 (Mavericks)
+
+	TARGET=10.9 make
+	TARGET=10.9 make install
+
+### Build under OS X 10.10 (Yosemite)
+
+	TARGET=10.10 make
+	TARGET=10.10 make install
+
+### Build under OS X 10.11 (El Capitan)
+
+	TARGET=10.11 make
+	TARGET=10.11 make install
+
 ## License
 Copyright (C) 2015 Christian Mayer <http://fox21.at>
 
