@@ -21,11 +21,13 @@
 					break;
 				
 				case NX_KEYTYPE_FAST:
+				case NX_KEYTYPE_NEXT:
 					cr = system("cmus-remote -n");
 					ALog(@"%d %d %d %d  Next", keyCode, keyState, keyIsRepeat, cr);
 					break;
 				
 				case NX_KEYTYPE_REWIND:
+				case NX_KEYTYPE_PREVIOUS:
 					cr = system("cmus-remote -r");
 					ALog(@"%d %d %d %d  Previous", keyCode, keyState, keyIsRepeat, cr);
 					break;
