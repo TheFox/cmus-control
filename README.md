@@ -34,8 +34,8 @@ Or load it manually:
 After changing the source code you might want to re-build the binary and re-install it.
 
 1. `make controld_unload`
-2. `make -C build/release/target_10.10`
-	**Note**: `10.10` means OS X 10.10 target. For example, on OS X 10.9 you need to use `build/release/target_10.9` and so on.
+2. `make -C build/release/target_10.11`
+	**Note**: `10.11` means OS X 10.11 target. For example, on OS X 10.9 you need to use `build/release/target_10.9` and so on.
 3. `make install`
 
 ## Build under various versions of OS X
