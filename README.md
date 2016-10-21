@@ -7,9 +7,10 @@ Control [cmus](https://cmus.github.io/) with Media Keys :rewind: :arrow_forward:
 Since Cmus Control doesn't have the behavior of changing any foreign processes it's highly recommended to [deactivate the *Remote Control Daemon*](http://blog.fox21.at/2015/11/20/control-cmus-with-media-keys.html).
 
 1. You need to install cmake: `brew install cmake`
-2. Run `make` to compile *Cmus Control Daemon*.
-3. Run `make install` to install `cmuscontrold` under `/usr/local/bin` path.
+2. Run `make install` to compile *Cmus Control Daemon* and install `cmuscontrold` under `/usr/local/bin` path.
 	A [launchd.plist](https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man5/launchd.plist.5.html) file named `at.fox21.cmuscontrold.plist` will be created under `/Library/LaunchAgents` to start *Cmus Control Daemon* automatically on login.
+
+If you just want to compile *Cmus Control Daemon* run `make`.
 
 ## Uninstall
 
@@ -40,30 +41,37 @@ After changing the source code you might want to re-build the binary and re-inst
 
 ## Build under various versions of OS X
 
-You can either edit the `Makefile` file or set the environment variable to a different version of OS X.
+You can either edit the `Makefile` file or set the environment variable to a different version of OS X. Make sure you have the correct SDK version installed for your target. If you build it for a 10.11 target you need at least SDK version 10.11.
+
+You can check installed SDKs by running
+
+	xcodebuild -showsdks
+
+in your shell. OS X SDKs are located under
+
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs
+
+on your file system.
 
 ### Build under OS X 10.8 (Mountain Lion)
 
-	TARGET=10.8 make
 	TARGET=10.8 make install
 
 ### Build under OS X 10.9 (Mavericks)
 
-	TARGET=10.9 make
 	TARGET=10.9 make install
 
 ### Build under OS X 10.10 (Yosemite)
 
-	TARGET=10.10 make
 	TARGET=10.10 make install
 
 ### Build under OS X 10.11 (El Capitan)
 
-	TARGET=10.11 make
 	TARGET=10.11 make install
 
 ## License
-Copyright (C) 2015 Christian Mayer <http://fox21.at>
+
+Copyright (C) 2015 Christian Mayer <https://fox21.at>
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
