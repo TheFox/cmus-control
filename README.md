@@ -12,7 +12,7 @@ Since Cmus Control doesn't have the behavior of changing any foreign processes i
 2. Run `make install` to compile *Cmus Control Daemon* and install `cmuscontrold` under `/usr/local/bin` path.
 	A [launchd.plist](https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man5/launchd.plist.5.html) file named `at.fox21.cmuscontrold.plist` will be created under `/Library/LaunchAgents` to start *Cmus Control Daemon* automatically on login.
 
-If you just want to compile *Cmus Control Daemon* run `make`.
+If you just want to compile *Cmus Control Daemon* without installing run `make`. The binary will be created at `build/release/bin/cmuscontrold`.
 
 ## Uninstall
 
