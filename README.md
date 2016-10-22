@@ -26,17 +26,17 @@ Just run `make uninstall`. Doing so
 
 After a successful installation the `cmuscontrold` is loaded/started automatically with `launchctl`. You can unload the daemon manually:
 
-	make controld_unload
+	make unload
 	
 Or load it manually:
 
-	make controld_load
+	make load
 
 ## Re-build
 
 After changing the source code you might want to re-build the binary and re-install it.
 
-1. `make controld_unload`
+1. `make unload`
 2. `make -C build/release`
 3. `make install`
 

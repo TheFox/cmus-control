@@ -38,10 +38,12 @@ tmp/at.fox21.cmuscontrold.plist: skel/at.fox21.cmuscontrold.plist | tmp
 		s|%LOG_PATH%|$(CMUSCONTROLD_LOG)|g; \
 		' $< > $@
 
-controld_load:
+.PHONY: load
+load:
 	launchctl load /Library/LaunchAgents/at.fox21.cmuscontrold.plist
 
-controld_unload:
+.PHONY: unload
+unload:
 	launchctl unload /Library/LaunchAgents/at.fox21.cmuscontrold.plist
 
 .PHONY: install
@@ -49,12 +51,12 @@ install: tmp/at.fox21.cmuscontrold.plist setup $(DST)/release
 	sudo -v
 	sudo $(CP) $< $(LAUNCHD_CONFIG_DIR)
 	install -c $(DST)/release/bin/cmuscontrold $(INSTALL_DIR)
-	$(MAKE) controld_load
+	$(MAKE) load
 
 .PHONY: uninstall
 uninstall:
 	sudo -v
-	$(MAKE) controld_unload
+	$(MAKE) unload
 	sudo $(RM) $(LAUNCHD_CONFIG_DIR)/at.fox21.cmuscontrold.plist
 	$(RM) $(INSTALL_DIR)/cmuscontrold
 
