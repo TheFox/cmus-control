@@ -6,7 +6,7 @@
 		
 		<key>ProgramArguments</key>
 		<array>
-			<string>%BIN_PATH%</string>
+			<string>@PROJECT_INSTALL_BIN_DST_PATH@/cmuscontrold</string>
 		</array>
 		
 		<key>EnvironmentVariables</key>
@@ -17,10 +17,10 @@
 		
 		<key>ProcessType</key> <string>Background</string>
 		
-		<key>RunAtLoad</key> <true/>
+		<key>RunAtLoad</key> <true />
 		
-		<key>KeepAlive</key> <true/>
+		<key>KeepAlive</key> <true />
 		
-		<key>Disabled</key> <false/>
+		<key>Disabled</key> <false />
 	</dict>
 </plist>

@@ -1,12 +1,9 @@
 
 DST = build
-RM = rm -rdf
+RM = rm -vrdf
 CP = cp
 MKDIR = mkdir -p
 CMAKE = cmake
-LAUNCHD_CONFIG_DIR = /Library/LaunchAgents
-CMUSCONTROLD_LOG = /tmp/cmuscontrold.log
-INSTALL_DIR = /usr/local/bin
 
 
 .PHONY: all
@@ -32,33 +29,23 @@ $(DST)/debug:
 tmp:
 	$(MKDIR) $@
 
-tmp/at.fox21.cmuscontrold.plist: skel/at.fox21.cmuscontrold.plist | tmp
-	sed ' \
-		s|%BIN_PATH%|$(INSTALL_DIR)/cmuscontrold|g; \
-		s|%LOG_PATH%|$(CMUSCONTROLD_LOG)|g; \
-		' $< > $@
-
 .PHONY: load
-load:
-	launchctl load /Library/LaunchAgents/at.fox21.cmuscontrold.plist
+load: | $(DST)/release
+	cd $(DST)/release && $(MAKE) launchctl_load
 
 .PHONY: unload
-unload:
-	launchctl unload /Library/LaunchAgents/at.fox21.cmuscontrold.plist
+unload: | $(DST)/release
+	cd $(DST)/release && $(MAKE) launchctl_unload
 
 .PHONY: install
-install: tmp/at.fox21.cmuscontrold.plist setup $(DST)/release
-	sudo -v
-	sudo $(CP) $< $(LAUNCHD_CONFIG_DIR)
-	install -c $(DST)/release/bin/cmuscontrold $(INSTALL_DIR)
+install: setup $(DST)/release
+	cd $(DST)/release && $(MAKE) install
 	$(MAKE) load
 
 .PHONY: uninstall
-uninstall:
-	sudo -v
+uninstall: | $(DST)/release
 	$(MAKE) unload
-	sudo $(RM) $(LAUNCHD_CONFIG_DIR)/at.fox21.cmuscontrold.plist
-	$(RM) $(INSTALL_DIR)/cmuscontrold
+	cd $(DST)/release && $(MAKE) uninstall
 
 .PHONY: clean
 clean:

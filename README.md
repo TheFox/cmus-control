@@ -2,15 +2,19 @@
 
 Control [cmus](https://cmus.github.io/) with Media Keys :rewind: :arrow_forward: :fast_forward: under [OS X](https://en.wikipedia.org/wiki/OS_X).
 
+## Requirements
+
+- At least **macOS 10.8**.
+- `cmake` to build it from source.
+- Optional [cmus](https://cmus.github.io/) installed. ;)
+
 ## Install
 
 Since Cmus Control doesn't have the behavior of changing any foreign processes it's highly recommended to [deactivate the *Remote Control Daemon*](http://blog.fox21.at/2015/11/20/control-cmus-with-media-keys.html).
 
-**Minimum required OS X version: 10.8**
-
 1. You need to install cmake: `brew install cmake`
 2. Run `make install` to compile *Cmus Control Daemon* and install `cmuscontrold` under `/usr/local/bin` path.
-	A [launchd.plist](https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man5/launchd.plist.5.html) file named `at.fox21.cmuscontrold.plist` will be created under `/Library/LaunchAgents` to start *Cmus Control Daemon* automatically on login.
+	A [launchd.plist](https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man5/launchd.plist.5.html) file named `at.fox21.cmuscontrold.plist` will be created under `~/Library/LaunchAgents` to start *Cmus Control Daemon* automatically on login.
 
 If you just want to compile *Cmus Control Daemon* without installing run `make`. The binary will be created at `build/release/bin/cmuscontrold`.
 
@@ -19,7 +23,7 @@ If you just want to compile *Cmus Control Daemon* without installing run `make`.
 Just run `make uninstall`. Doing so
 
 - `cmuscontrold` will be unloaded via [`launchctl`](https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/launchctl.1.html);
-- `/Library/LaunchAgents/at.fox21.cmuscontrold.plist` will be removed;
+- `~/Library/LaunchAgents/at.fox21.cmuscontrold.plist` will be removed;
 - `/usr/local/bin/cmuscontrold` will be removed.
 
 ## Load/Unload

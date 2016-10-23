@@ -4,10 +4,13 @@ project(CmusControl)
 set(PROJECT_RELEASE_ID 2)
 set(PROJECT_VERSION_MAJOR 1)
 set(PROJECT_VERSION_MINOR 0)
-set(PROJECT_VERSION_PATCH 1)
-set(PROJECT_VERSION_APPENDIX "")
+set(PROJECT_VERSION_PATCH 2)
+set(PROJECT_VERSION_APPENDIX "-dev")
 set(PROJECT_COPYRIGHT "Copyright (C) 2015 Christian Mayer <https://fox21.at>")
 set(PROJECT_USE_PID_FILE 0)
+set(PROJECT_INSTALL_BIN_DST_PATH "/usr/local/bin")
+set(PROJECT_INSTALL_LAUNCHAGENTS_DST_PATH "~/Library/LaunchAgents")
+
 set(USE_ARC 1)
 
 set(CMAKE_OSX_DEPLOYMENT_TARGET "10.8")
@@ -29,6 +32,7 @@ else()
 endif()
 
 configure_file("${PROJECT_SOURCE_DIR}/src/config.h.in" "${PROJECT_BINARY_DIR}/src/config.h" NEWLINE_STYLE LF)
+configure_file("${PROJECT_SOURCE_DIR}/skel/at.fox21.cmuscontrold.plist" "${PROJECT_BINARY_DIR}/skel/at.fox21.cmuscontrold.plist" NEWLINE_STYLE LF)
 
 file(GLOB_RECURSE PROJECT_SOURCES "src/*.m")
 
@@ -55,6 +59,24 @@ target_link_libraries(cmuscontrold ${APPKIT_LIBRARY})
 if(${CMAKE_BUILD_TYPE} STREQUAL "Release")
 	add_custom_command(TARGET cmuscontrold POST_BUILD COMMAND strip ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/cmuscontrold)
 endif()
+
+install(TARGETS cmuscontrold
+	PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
+	RUNTIME DESTINATION ${PROJECT_INSTALL_BIN_DST_PATH}
+	CONFIGURATIONS Release)
+
+install(FILES "${PROJECT_BINARY_DIR}/skel/at.fox21.cmuscontrold.plist"
+	PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
+	DESTINATION ${PROJECT_INSTALL_LAUNCHAGENTS_DST_PATH}
+	CONFIGURATIONS Release)
+
+add_custom_target(uninstall
+	COMMAND rm -vf "${PROJECT_INSTALL_LAUNCHAGENTS_DST_PATH}/at.fox21.cmuscontrold.plist"
+	COMMAND rm -vf "${PROJECT_INSTALL_BIN_DST_PATH}/cmuscontrold"
+	)
+
+add_custom_target(launchctl_load   COMMAND launchctl load   "${PROJECT_INSTALL_LAUNCHAGENTS_DST_PATH}/at.fox21.cmuscontrold.plist")
+add_custom_target(launchctl_unload COMMAND launchctl unload "${PROJECT_INSTALL_LAUNCHAGENTS_DST_PATH}/at.fox21.cmuscontrold.plist")
 
 
 MESSAGE("")
