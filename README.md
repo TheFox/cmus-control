@@ -5,12 +5,33 @@ Control [cmus](https://cmus.github.io/) with Media Keys :rewind: :arrow_forward:
 ## Requirements
 
 - At least **macOS 10.8**.
-- `cmake` to build it from source.
-- Optional [cmus](https://cmus.github.io/) installed. ;)
+- `cmake` to build it.
+- Since Cmus Control doesn't have the behavior of changing any foreign processes it's highly recommended to [deactivate the *Remote Control Daemon*](http://blog.fox21.at/2015/11/20/control-cmus-with-media-keys.html).
+- [cmus](https://cmus.github.io/) installed. ;)
 
 ## Install
 
-Since Cmus Control doesn't have the behavior of changing any foreign processes it's highly recommended to [deactivate the *Remote Control Daemon*](http://blog.fox21.at/2015/11/20/control-cmus-with-media-keys.html).
+You can either install Cmus Control via [Homebrew](#homebrew-installation) or [manually](#manually-installation). The preferred method of installation is via Homebrew.
+
+### Homebrew installation
+
+1. Add the [`thefox/brewery`](https://github.com/TheFox/homebrew-brewery) tap to brew.
+
+		brew tap thefox/brewery
+
+2. Actual installation
+
+		brew install cmus-control
+
+3. After a successful installation follow the Caveats output, start the service:
+
+		brew services start thefox/brewery/cmus-control
+	
+	Or, if you don't want/need a background service you can just run
+	
+		cmuscontrold
+
+### Manual installation
 
 1. You need to install cmake: `brew install cmake`
 2. Run `make install` to compile *Cmus Control Daemon* and install `cmuscontrold` under `/usr/local/bin` path.
@@ -18,7 +39,7 @@ Since Cmus Control doesn't have the behavior of changing any foreign processes i
 
 If you just want to compile *Cmus Control Daemon* without installing run `make`. The binary will be created at `build/release/bin/cmuscontrold`.
 
-## Uninstall
+#### Uninstall
 
 Just run `make uninstall`. Doing so
 
@@ -26,9 +47,9 @@ Just run `make uninstall`. Doing so
 - `~/Library/LaunchAgents/at.fox21.cmuscontrold.plist` will be removed;
 - `/usr/local/bin/cmuscontrold` will be removed.
 
-## Load/Unload
+#### Load/Unload
 
-After a successful installation the `cmuscontrold` is loaded/started automatically with `launchctl`. You can unload the daemon manually:
+After a successful manual installation the `cmuscontrold` is loaded/started automatically with `launchctl`. You can unload the daemon manually:
 
 	make unload
 	
@@ -36,7 +57,7 @@ Or load it manually:
 
 	make load
 
-## Re-build
+#### Re-build
 
 After changing the source code you might want to re-build the binary and re-install it.
 
