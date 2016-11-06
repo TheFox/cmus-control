@@ -1,0 +1,8 @@
+language: objective-c
+before_install:
+    - brew update
+    - 'which cmake || ( brew install cmake )'
+install:
+    - make build/release
+    - make install
+script: which -a cmuscontrold
