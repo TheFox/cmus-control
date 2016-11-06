@@ -4,5 +4,5 @@ before_install:
     - 'which cmake || ( brew install cmake )'
 install:
     - make build/release
-    - make install
+    - cd build/release; make install
 script: which -a cmuscontrold
