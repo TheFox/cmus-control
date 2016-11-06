@@ -3,6 +3,7 @@ os: osx
 matrix:
     include:
         - {os: osx, osx_image: xcode6.4}
+        - {os: osx, osx_image: xcode7}
 before_install:
     - brew update
     - 'which cmake || ( brew install cmake )'
