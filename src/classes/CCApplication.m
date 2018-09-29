@@ -3,7 +3,7 @@
 
 @implementation CCApplication
 
-- (void)sendEvent:(NSEvent *)anEvent{
+- (void)sendEvent:(NSEvent*)anEvent{
 	
 	if([anEvent type] == NSSystemDefined && [anEvent subtype] == 8){
 		int data = [anEvent data1];

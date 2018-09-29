@@ -1,7 +1,7 @@
 
 #import "main.h"
 
-int main(int argc, const char *argv[]){
+int main(int argc, const char* argv[]){
 	ALog(@"%s %d.%d.%d%s (Release %d)", PROJECT_NAME, PROJECT_VERSION_MAJOR, PROJECT_VERSION_MINOR, PROJECT_VERSION_PATCH, PROJECT_VERSION_APPENDIX, PROJECT_RELEASE_ID);
 	ALog(@"%s", PROJECT_COPYRIGHT);
 	
