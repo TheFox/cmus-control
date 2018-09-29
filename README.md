@@ -6,7 +6,7 @@ Control [cmus](https://cmus.github.io/) with Media Keys :rewind: :arrow_forward:
 
 - At least **macOS 10.8**.
 - `cmake` to build it.
-- Since Cmus Control doesn't have the behavior of changing any foreign processes it's highly recommended to [deactivate the *Remote Control Daemon*](http://blog.fox21.at/2015/11/20/control-cmus-with-media-keys.html).
+- Since Cmus Control doesn't have the behavior of changing any foreign processes it's highly recommended to [deactivate the *Remote Control Daemon*](https://blog.fox21.at/2015/11/20/control-cmus-with-media-keys.html).
 - [cmus](https://cmus.github.io/) installed. ;)
 
 ## Install
