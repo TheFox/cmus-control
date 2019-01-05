@@ -17,26 +17,26 @@ You can either install Cmus Control via [Homebrew](#homebrew-installation) or [m
 
 1. Add the [`thefox/brewery`](https://github.com/TheFox/homebrew-brewery) tap to brew.
 	
-	```
-	brew tap thefox/brewery
+	```bash
+	$ brew tap thefox/brewery
 	```
 
 2. Actual installation
 	
-	```
-	brew install cmus-control
+	```bash
+	$ brew install cmus-control
 	```
 
 3. After a successful installation follow the Caveats output, start the service:
 	
-	```
-	brew services start thefox/brewery/cmus-control
+	```bash
+	$ brew services start thefox/brewery/cmus-control
 	```
 	
 	Or, if you don't want/need a background service you can just run
 	
-	```
-	cmuscontrold
+	```bash
+	$ cmuscontrold
 	```
 
 ### Manual installation
@@ -59,21 +59,21 @@ Just run `make uninstall`. Doing so
 
 After a successful manual installation the `cmuscontrold` is loaded/started automatically with `launchctl`. You can unload the daemon manually:
 
-```
-make unload
+```bash
+$ make unload
 ```
 
 Or load it manually:
 
-```
-make load
+```bash
+$ make load
 ```
 
 #### Re-build
 
 After changing the source code you might want to re-build the binary and re-install it.
 
-```
+```bash
 make unload
 make -C build/release
 make install
