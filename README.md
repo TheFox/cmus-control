@@ -1,6 +1,13 @@
 # Cmus Control
 
-Control [cmus](https://cmus.github.io/) with Media Keys :rewind: :arrow_forward: :fast_forward: under [OS X](https://en.wikipedia.org/wiki/OS_X).
+Control [cmus](https://cmus.github.io/) with Media Keys :rewind: :arrow_forward: :fast_forward: under [macOS](https://en.wikipedia.org/wiki/MacOS).
+
+## Project Outlines
+
+The project outlines as described in my blog post about [Open Source Software Collaboration](https://blog.fox21.at/2019/02/21/open-source-software-collaboration.html).
+
+- The main purpose of this software is to provide a support for cmus under macOS.
+- The feature-set is restricted because this software already provides the features what it was made of. But still, feel free to request features.
 
 ## Requirements
 
