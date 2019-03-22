@@ -10,9 +10,3 @@
 - Minimum required OS X version: 10.8
 - Enhancements related to #6.
 - EditorConfig added.
-
-## v1.0.0
-
-## v1.0.0-rc.2
-
-## v1.0.0-rc.1
