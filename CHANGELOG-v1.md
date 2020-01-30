@@ -1,5 +1,9 @@
 # Release Notes for Cmus Control v1.x
 
+## v1.1.0
+
+- MIT License
+
 ## v1.0.2
 
 - Brew Formula added. #5
