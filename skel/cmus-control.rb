@@ -9,7 +9,7 @@ class CmusControl < Formula
   depends_on "cmus" => :run
 
   def install
-    system "make", "build/release"
+    system "./bin/build_release.sh"
 
     bin.install "build/release/bin/cmuscontrold"
   end

@@ -2,3 +2,5 @@ CHANGELOG-*.txt
 /build/
 /releases/
 /tmp/
+/.idea/
+/cmake-build-debug/

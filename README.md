@@ -49,14 +49,16 @@ You can either install Cmus Control via [Homebrew](#homebrew-installation) or [m
 ### Manual installation
 
 1. You need to install cmake: `brew install cmake`
-2. Run `make install` to compile *Cmus Control Daemon* and install `cmuscontrold` under `/usr/local/bin` path.
+2. Run `./bin/install.sh` to compile *Cmus Control Daemon* and install `cmuscontrold` under `/usr/local/bin` path.
 	A [launchd.plist](https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man5/launchd.plist.5.html) file named `at.fox21.cmuscontrold.plist` will be created under `~/Library/LaunchAgents` to start *Cmus Control Daemon* automatically on login.
 
-If you just want to compile *Cmus Control Daemon* without installing run `make`. The binary will be created at `build/release/bin/cmuscontrold`.
+If you just want to compile *Cmus Control Daemon* without installing run `./bin/build_release.sh`. The binary will be created at `build/release/bin/cmuscontrold`.
+
+For a debugging version you can run `./bin/build_debug.sh`. The binary will be created at `build/debug/bin/cmuscontrold`.
 
 #### Uninstall
 
-Just run `make uninstall`. Doing so
+Just run `./bin/uninstall.sh`. Doing so
 
 - `cmuscontrold` will be unloaded via [`launchctl`](https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/launchctl.1.html);
 - `~/Library/LaunchAgents/at.fox21.cmuscontrold.plist` will be removed;
@@ -67,13 +69,13 @@ Just run `make uninstall`. Doing so
 After a successful manual installation the `cmuscontrold` is loaded/started automatically with `launchctl`. You can unload the daemon manually:
 
 ```bash
-$ make unload
+$ ./bin/lctl_unload.sh
 ```
 
 Or load it manually:
 
 ```bash
-$ make load
+$ ./bin/lctl_load.sh
 ```
 
 #### Re-build
@@ -81,7 +83,8 @@ $ make load
 After changing the source code you might want to re-build the binary and re-install it.
 
 ```bash
-make unload
-make -C build/release
-make install
+./bin/lctl_unload.sh
+./bin/cleanup.sh
+./bin/install.sh
+./bin/lctl_load.sh
 ```
