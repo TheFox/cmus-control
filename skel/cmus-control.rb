@@ -41,8 +41,8 @@ class CmusControl < Formula
 
         <key>EnvironmentVariables</key>
         <dict>
-        <key>PATH</key>
-        <string>/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin</string>
+          <key>PATH</key>
+          <string>/opt/homebrew/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin</string>
         </dict>
 
         <key>ProcessType</key> <string>Background</string>
