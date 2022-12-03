@@ -36,7 +36,7 @@ class CmusControl < Formula
 
         <key>ProgramArguments</key>
         <array>
-        <string>#{opt_bin}/cmuscontrold</string>
+          <string>#{opt_bin}/cmuscontrold</string>
         </array>
 
         <key>EnvironmentVariables</key>
@@ -52,7 +52,7 @@ class CmusControl < Formula
         <key>KeepAlive</key> <true />
 
         <key>Disabled</key> <false />
-        </dict>
+      </dict>
     </plist>
     EOS
   end
