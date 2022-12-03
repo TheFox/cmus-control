@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.0)
 project(CmusControl)
 
-set(PROJECT_RELEASE_ID 4)
+set(PROJECT_RELEASE_ID 5)
 set(PROJECT_VERSION_MAJOR 1)
-set(PROJECT_VERSION_MINOR 1)
+set(PROJECT_VERSION_MINOR 2)
 set(PROJECT_VERSION_PATCH 0)
 set(PROJECT_VERSION_APPENDIX "")
 set(PROJECT_COPYRIGHT "Copyright (C) 2015 Christian Mayer <https://fox21.at>")

@@ -1,5 +1,10 @@
 # Release Notes for Cmus Control v1.x
 
+## v1.2.0
+
+- PATH environment variable fix for Apple silicon. #11
+- Transition to use shell scripts instead of a Makefile.
+
 ## v1.1.0
 
 - MIT License
