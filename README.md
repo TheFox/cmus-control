@@ -7,7 +7,7 @@ Control [cmus](https://cmus.github.io/) with Media Keys :rewind: :arrow_forward:
 The project outlines as described in my blog post about [Open Source Software Collaboration](https://blog.fox21.at/2019/02/21/open-source-software-collaboration.html).
 
 - The main purpose of this software is to provide support for cmus under macOS. Cmus can be controlled by the Media Keys of your Apple Keyboard.
-- The feature-set is restricted because this software already provides the features what it was made of. But still, feel free to request features.
+- The feature set is restricted because this software already provides the intended features. But still, feel free to request features.
 
 ## Requirements
 
