@@ -12,7 +12,7 @@ The project outlines as described in my blog post about [Open Source Software Co
 ## Requirements
 
 - At least **macOS 10.8**.
-- `cmake` to build it.
+- `zig` to build it.
 - Since Cmus Control doesn't have the behavior of changing any foreign processes it's highly recommended to [deactivate the *Remote Control Daemon*](https://blog.fox21.at/2015/11/20/control-cmus-with-media-keys.html).
 - [cmus](https://cmus.github.io/) installed. ;)
 
@@ -25,43 +25,39 @@ You can either install Cmus Control via [Homebrew](#homebrew-installation) or [m
 1. Add the [`thefox/brewery`](https://github.com/TheFox/homebrew-brewery) tap to brew.
 	
 	```bash
-	$ brew tap thefox/brewery
+	brew tap thefox/brewery
 	```
 
 2. Actual installation
 	
 	```bash
-	$ brew install cmus-control
+	brew install cmus-control
 	```
 
 3. After a successful installation follow the Caveats output, start the service:
 	
 	```bash
-	$ brew services start thefox/brewery/cmus-control
+	brew services start thefox/brewery/cmus-control
 	```
 	
 	Or, if you don't want/need a background service you can just run
 	
 	```bash
-	$ cmuscontrold
+	cmuscontrold
 	```
 
 ### Manual installation
 
-1. You need to install cmake: `brew install cmake`
+1. You need to install zig: `brew install zig`
 2. Run `./bin/install.sh` to compile *Cmus Control Daemon* and install `cmuscontrold` under `/usr/local/bin` path.
-	A [launchd.plist](https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man5/launchd.plist.5.html) file named `at.fox21.cmuscontrold.plist` will be created under `~/Library/LaunchAgents` to start *Cmus Control Daemon* automatically on login.
-
-If you just want to compile *Cmus Control Daemon* without installing run `./bin/build_release.sh`. The binary will be created at `build/release/bin/cmuscontrold`.
-
-For a debugging version you can run `./bin/build_debug.sh`. The binary will be created at `build/debug/bin/cmuscontrold`.
+	A [launchd.plist](https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man5/launchd.plist.5.html) file named `at.fox21.cmuscontrold.plist` will be created under `$HOME/Library/LaunchAgents` to start *Cmus Control Daemon* automatically on login.
 
 #### Uninstall
 
 Just run `./bin/uninstall.sh`. Doing so
 
 - `cmuscontrold` will be unloaded via [`launchctl`](https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/launchctl.1.html);
-- `~/Library/LaunchAgents/at.fox21.cmuscontrold.plist` will be removed;
+- `$HOME/Library/LaunchAgents/at.fox21.cmuscontrold.plist` will be removed;
 - `/usr/local/bin/cmuscontrold` will be removed.
 
 #### Load/Unload
@@ -69,22 +65,11 @@ Just run `./bin/uninstall.sh`. Doing so
 After a successful manual installation the `cmuscontrold` is loaded/started automatically with `launchctl`. You can unload the daemon manually:
 
 ```bash
-$ ./bin/lctl_unload.sh
+launchctl unload "$HOME/Library/LaunchAgents/at.fox21.cmuscontrold.plist"
 ```
 
 Or load it manually:
 
 ```bash
-$ ./bin/lctl_load.sh
-```
-
-#### Re-build
-
-After changing the source code you might want to re-build the binary and re-install it.
-
-```bash
-./bin/lctl_unload.sh
-./bin/cleanup.sh
-./bin/install.sh
-./bin/lctl_load.sh
+launchctl load "$HOME/Library/LaunchAgents/at.fox21.cmuscontrold.plist"
 ```

@@ -6,7 +6,7 @@
 		
 		<key>ProgramArguments</key>
 		<array>
-			<string>@PROJECT_INSTALL_BIN_DST_PATH@/cmuscontrold</string>
+			<string>/usr/local/bin/cmuscontrold</string>
 		</array>
 		
 		<key>EnvironmentVariables</key>

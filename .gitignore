@@ -1,6 +1,4 @@
 CHANGELOG-*.txt
-/build/
-/releases/
-/tmp/
 /.idea/
-/cmake-build-debug/
+/.zig-cache/
+/zig-out/

@@ -1,4 +1,8 @@
 
+#import <AppKit/AppKit.h>
+#import <Foundation/Foundation.h>
+#import <IOKit/hidsystem/ev_keymap.h>
+
 #import "CCApplication.h"
 
 @implementation CCApplication
@@ -17,24 +21,22 @@
 			switch(keyCode){
 				case NX_KEYTYPE_PLAY:
 					cr = system("cmus-remote -u");
-					ALog(@"%d %d %d %d  Play", keyCode, keyState, keyIsRepeat, cr);
+					NSLog(@"%d %d %d %d  Play", keyCode, keyState, keyIsRepeat, cr);
 					break;
 				
 				case NX_KEYTYPE_FAST:
 				case NX_KEYTYPE_NEXT:
 					cr = system("cmus-remote -n");
-					ALog(@"%d %d %d %d  Next", keyCode, keyState, keyIsRepeat, cr);
+					NSLog(@"%d %d %d %d  Next", keyCode, keyState, keyIsRepeat, cr);
 					break;
 				
 				case NX_KEYTYPE_REWIND:
 				case NX_KEYTYPE_PREVIOUS:
 					cr = system("cmus-remote -r");
-					ALog(@"%d %d %d %d  Previous", keyCode, keyState, keyIsRepeat, cr);
+					NSLog(@"%d %d %d %d  Previous", keyCode, keyState, keyIsRepeat, cr);
 					break;
 			}
 		}
-		
-		// return;
 	}
 	
 	[super sendEvent:anEvent];

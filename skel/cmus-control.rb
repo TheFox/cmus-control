@@ -5,13 +5,12 @@ class CmusControl < Formula
   url "https://dev.fox21.at/cmus-control/releases/%FILENAME%"
   sha256 "%SHA256%"
 
-  depends_on "cmake" => :build
-  depends_on "cmus" => :run
+  depends_on "zig" => :run
 
   def install
-    system "./bin/build_release.sh"
+    system "zig build"
 
-    bin.install "build/release/bin/cmuscontrold"
+    bin.install "zig-out/bin/cmuscontrold"
   end
 
   def caveats; <<-EOS.undent

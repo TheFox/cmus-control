@@ -2,16 +2,10 @@
 
 SCRIPT_BASEDIR=$(dirname "$0")
 
-which make &> /dev/null || { echo 'ERROR: make not found in PATH' >&2; exit 1; }
-
 cd "${SCRIPT_BASEDIR}/.."
 pwd
 
-set -x
-
-mkdir -p build/release
-cd build/release
-
-cmake -DCMAKE_BUILD_TYPE=Release ../..
-make install
-make launchctl_load
+zig build
+cp -v zig-out/bin/cmuscontrold /usr/local/bin/
+cp skel/at.fox21.cmuscontrold.plist "${HOME}/Library/LaunchAgents/at.fox21.cmuscontrold.plist"
+launchctl load "${HOME}/Library/LaunchAgents/at.fox21.cmuscontrold.plist"
