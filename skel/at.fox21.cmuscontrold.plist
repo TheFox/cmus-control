@@ -3,24 +3,24 @@
 <plist version="1.0">
 	<dict>
 		<key>Label</key> <string>at.fox21.cmuscontrold</string>
-		
+
 		<key>ProgramArguments</key>
 		<array>
 			<string>/usr/local/bin/cmuscontrold</string>
 		</array>
-		
+
 		<key>EnvironmentVariables</key>
 		<dict>
 			<key>PATH</key>
 			<string>/opt/homebrew/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin</string>
 		</dict>
-		
+
 		<key>ProcessType</key> <string>Background</string>
-		
+
 		<key>RunAtLoad</key> <true />
-		
+
 		<key>KeepAlive</key> <true />
-		
+
 		<key>Disabled</key> <false />
 	</dict>
 </plist>
