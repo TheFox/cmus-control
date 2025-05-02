@@ -1,0 +1,32 @@
+name: CmusControl
+
+on:
+  push:
+    branches:
+      - master
+      - feature/zig-rewrite
+
+jobs:
+  test:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        zig-version:
+          - '0.14.0'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - uses: mlugg/setup-zig@v1
+        with:
+          version: ${{ matrix.zig-version }}
+
+      - name: Check Zig version
+        run: zig version
+
+      - name: Build
+        run: zig build --verbose --summary all --release
+
+      - name: Check help
+        run: ./zig-out/bin/cmuscontrold --help
