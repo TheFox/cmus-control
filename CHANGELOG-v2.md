@@ -2,4 +2,4 @@
 
 ## 2.0.0
 
-- Dropped CMake and make. Use zig to build the project. 
+- Drop CMake and make. Use zig to build the project.

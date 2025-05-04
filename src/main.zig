@@ -1,4 +1,4 @@
-const VERSION = "2.0.0-dev.1";
+const VERSION = "2.0.0";
 const std = @import("std");
 const process = std.process;
 const eql = std.mem.eql;

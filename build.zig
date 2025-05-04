@@ -9,17 +9,12 @@ pub fn build(b: *std.Build) void {
         .preferred_optimize_mode = .ReleaseSmall,
     });
     const build_all = b.option(bool, "buildall", "Enable build-all mode") orelse false;
-    const sdk_path_n = b.option([]const u8, "sdk", "SDK path");
 
     print("target arch: {s}\n", .{@tagName(target.result.cpu.arch)});
     print("target cpu: {s}\n", .{target.result.cpu.model.name});
     print("target os: {s}\n", .{@tagName(target.result.os.tag)});
     print("optimize: {s}\n", .{@tagName(optimize)});
     print("build all: {any}\n", .{build_all});
-
-    if (sdk_path_n) |sdk_path| {
-        print("SDK: {s}\n", .{sdk_path});
-    }
 
     var target_name: []u8 = undefined;
     if (build_all) {
@@ -56,13 +51,6 @@ pub fn build(b: *std.Build) void {
 
     exe.linkFramework("AppKit");
     exe.linkFramework("Foundation");
-
-    if (sdk_path_n) |sdk_path| {
-        const sdk_path_l: LazyPath = .{
-            .cwd_relative = sdk_path,
-        };
-        exe.addFrameworkPath(sdk_path_l);
-    }
 
     const options = b.addOptions();
     options.addOption(bool, "buildall", build_all);

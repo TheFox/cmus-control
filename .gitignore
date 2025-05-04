@@ -1,7 +1,4 @@
-CHANGELOG-*.txt
 /.idea/
 /.zig-cache/
 /zig-out/
-/CMakeLists.txt
-/Makefile
 /README-old.md
