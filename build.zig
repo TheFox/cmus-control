@@ -34,7 +34,7 @@ pub fn build(b: *std.Build) void {
         .name = target_name,
         .target = target,
         .optimize = optimize,
-        .strip = true,
+        .strip = optimize != .Debug,
         .root_source_file = b.path("src/main.zig"),
     });
 
