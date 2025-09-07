@@ -32,10 +32,12 @@ pub fn build(b: *std.Build) void {
 
     const exe = b.addExecutable(.{
         .name = target_name,
-        .target = target,
-        .optimize = optimize,
-        .strip = optimize != .Debug,
-        .root_source_file = b.path("src/main.zig"),
+        .root_module = b.createModule(.{
+            .root_source_file = b.path("src/main.zig"),
+            .target = target,
+            .optimize = optimize,
+            .strip = optimize != .Debug,
+        }),
     });
 
     exe.addCSourceFiles(.{
