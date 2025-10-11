@@ -54,10 +54,6 @@ pub fn build(b: *std.Build) void {
     exe.linkFramework("AppKit");
     exe.linkFramework("Foundation");
 
-    const options = b.addOptions();
-    options.addOption(bool, "buildall", build_all);
-    exe.root_module.addOptions("config", options);
-
     b.installArtifact(exe);
 
     const run_cmd = b.addRunArtifact(exe);
