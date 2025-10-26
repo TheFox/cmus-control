@@ -28,7 +28,7 @@ pub fn main() !void {
 
     while (args_iter.next()) |arg| {
         if (eql(u8, arg, "-h") or eql(u8, arg, "--help")) {
-            try print_help(stdout);
+            try printHelp(stdout);
             return;
         }
     }
@@ -36,7 +36,7 @@ pub fn main() !void {
     _ = nsapp_main(argc, argv);
 }
 
-fn print_help(stdout: *Writer) !void {
+fn printHelp(stdout: *Writer) !void {
     const help =
         \\Usage: cmuscontrold [-h|--help]
         \\
