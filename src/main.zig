@@ -1,31 +1,29 @@
 const VERSION = "2.1.2";
 const std = @import("std");
-const File = std.fs.File;
+const File = std.Io.File;
 const Writer = std.Io.Writer;
 const process = std.process;
 const eql = std.mem.eql;
 
-extern fn nsapp_main(argc: c_int, argv: [*][:0]u8) c_int;
+extern fn nsapp_main(argc: c_int, argv: [*]const [:0]const u8) c_int;
 
-pub fn main() !void {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
-    const allocator = gpa.allocator();
-    defer _ = gpa.deinit();
+pub fn main(init: std.process.Init) !void {
+    const minimal = init.minimal;
+    const allocator = init.arena.allocator();
 
     const stdout_buffer = try allocator.alloc(u8, 1024);
     defer allocator.free(stdout_buffer);
-    var stdout_writer = File.stdout().writer(stdout_buffer);
+    var stdout_writer = File.stdout().writer(init.io, stdout_buffer);
     const stdout = &stdout_writer.interface;
 
     try stdout.print("CmusControl " ++ VERSION ++ "\n", .{});
     try stdout.print("Copyright (C) 2015, 2025 Christian Mayer <https://fox21.at>\n", .{});
     try stdout.flush();
 
-    const args = std.process.argsAlloc(allocator) catch unreachable;
+    const args = try minimal.args.toSlice(allocator);
     const argc: c_int = @intCast(args.len);
     const argv = args.ptr;
-
-    var args_iter = try std.process.argsWithAllocator(allocator);
+    var args_iter = minimal.args.iterate();
     defer args_iter.deinit();
     _ = args_iter.next();
 

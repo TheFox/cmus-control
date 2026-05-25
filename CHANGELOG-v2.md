@@ -1,5 +1,9 @@
 # Release Notes for Cmus Control v2.x
 
+## 2.2.0 [unreleased]
+
+- Use Zig 0.16.0.
+
 ## 2.1.2
 
 - Use Zig 0.15.2.

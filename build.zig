@@ -6,8 +6,9 @@ const allocPrint = std.fmt.allocPrint;
 pub fn build(b: *std.Build) void {
     const version: std.SemanticVersion = .{
         .major = 2,
-        .minor = 1,
-        .patch = 2,
+        .minor = 2,
+        .patch = 0,
+        .pre = "dev.1",
     };
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{
@@ -35,18 +36,13 @@ pub fn build(b: *std.Build) void {
         target_name = allocPrint(b.allocator, "cmuscontrold", .{}) catch @panic("failed to allocate target name");
     }
 
-    const exe = b.addExecutable(.{
-        .name = target_name,
-        .version = version,
-        .root_module = b.createModule(.{
-            .root_source_file = b.path("src/main.zig"),
-            .target = target,
-            .optimize = optimize,
-            .strip = optimize != .Debug,
-        }),
+    const exe_mod = b.createModule(.{
+        .root_source_file = b.path("src/main.zig"),
+        .target = target,
+        .optimize = optimize,
+        .strip = optimize != .Debug,
     });
-
-    exe.addCSourceFiles(.{
+    exe_mod.addCSourceFiles(.{
         .files = &[_][]const u8{
             "src/main.m",
             "src/CCApplication.m",
@@ -56,10 +52,14 @@ pub fn build(b: *std.Build) void {
         },
         .language = .objective_c,
     });
+    exe_mod.linkFramework("AppKit", .{});
+    exe_mod.linkFramework("Foundation", .{});
 
-    exe.linkFramework("AppKit");
-    exe.linkFramework("Foundation");
-
+    const exe = b.addExecutable(.{
+        .name = target_name,
+        .version = version,
+        .root_module = exe_mod,
+    });
     b.installArtifact(exe);
 
     const run_cmd = b.addRunArtifact(exe);
