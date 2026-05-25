@@ -4,7 +4,7 @@ const print = std.debug.print;
 const allocPrint = std.fmt.allocPrint;
 
 pub fn build(b: *std.Build) void {
-    const version: std.SemanticVersion = .{
+    const version: std.SemanticVersion = .{ // VERSION
         .major = 2,
         .minor = 2,
         .patch = 0,
