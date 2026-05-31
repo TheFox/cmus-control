@@ -24,7 +24,7 @@ jobs:
         run: zig version
 
       - name: Build
-        run: zig build --release
+        run: zig build install --release
 
       - name: Check help
         run: ./zig-out/bin/cmuscontrold --help
