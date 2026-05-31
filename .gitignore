@@ -2,3 +2,5 @@
 /.zig-cache/
 /zig-out/
 /README-old.md
+/src/classes_old/
+/releases/

@@ -17,7 +17,7 @@ pub fn main(init: std.process.Init) !void {
     const stdout = &stdout_writer.interface;
 
     try stdout.print("CmusControl " ++ VERSION ++ "\n", .{});
-    try stdout.print("Copyright (C) 2015, 2025 Christian Mayer <https://fox21.at>\n", .{});
+    try stdout.print("Copyright (C) 2015 Christian Mayer <https://fox21.at>\n", .{});
     try stdout.flush();
 
     const args = try minimal.args.toSlice(allocator);
