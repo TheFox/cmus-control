@@ -1,13 +1,14 @@
 const std = @import("std");
 const LazyPath = std.Build.LazyPath;
 const print = std.debug.print;
-const allocPrint = std.fmt.allocPrint;
+const aprint = std.fmt.allocPrint;
 
-pub fn build(b: *std.Build) void {
+pub fn build(b: *std.Build) !void {
     const version: std.SemanticVersion = .{ // VERSION
         .major = 2,
         .minor = 2,
         .patch = 0,
+        .pre = "dev.1",
     };
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{
@@ -15,25 +16,17 @@ pub fn build(b: *std.Build) void {
     });
     const build_all = b.option(bool, "buildall", "Enable build-all mode") orelse false;
 
+    const target_name = try if (build_all)
+        aprint(b.allocator, "cmuscontrold-{s}-{s}", .{ @tagName(target.result.cpu.arch), target.result.cpu.model.name })
+    else
+        aprint(b.allocator, "cmuscontrold", .{});
+
     print("target arch: {s}\n", .{@tagName(target.result.cpu.arch)});
     print("target cpu: {s}\n", .{target.result.cpu.model.name});
     print("target os: {s}\n", .{@tagName(target.result.os.tag)});
+    print("target name: {s}\n", .{target_name});
     print("optimize: {s}\n", .{@tagName(optimize)});
     print("build all: {any}\n", .{build_all});
-
-    var target_name: []u8 = undefined;
-    if (build_all) {
-        target_name = allocPrint(
-            b.allocator,
-            "cmuscontrold-{s}-{s}",
-            .{
-                @tagName(target.result.cpu.arch),
-                target.result.cpu.model.name,
-            },
-        ) catch @panic("failed to allocate target name");
-    } else {
-        target_name = allocPrint(b.allocator, "cmuscontrold", .{}) catch @panic("failed to allocate target name");
-    }
 
     const exe_mod = b.createModule(.{
         .root_source_file = b.path("src/main.zig"),
