@@ -12,7 +12,7 @@ pub fn build(b: *std.Build) !void {
     };
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{
-        .preferred_optimize_mode = .ReleaseSmall,
+        .preferred_optimize_mode = .small,
     });
     const build_all = b.option(bool, "buildall", "Enable build-all mode") orelse false;
 
