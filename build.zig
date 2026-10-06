@@ -8,7 +8,7 @@ pub fn build(b: *std.Build) !void {
         .major = 2,
         .minor = 2,
         .patch = 0,
-        .pre = "dev.1",
+        .pre = "dev.2",
     };
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{
@@ -32,7 +32,7 @@ pub fn build(b: *std.Build) !void {
         .root_source_file = b.path("src/main.zig"),
         .target = target,
         .optimize = optimize,
-        .strip = optimize != .Debug,
+        .strip = optimize != .debug,
     });
     exe_mod.addCSourceFiles(.{
         .files = &[_][]const u8{
@@ -56,10 +56,7 @@ pub fn build(b: *std.Build) !void {
 
     const run_cmd = b.addRunArtifact(exe);
     run_cmd.step.dependOn(b.getInstallStep());
-
-    if (b.args) |args| {
-        run_cmd.addArgs(args);
-    }
+    run_cmd.addPassthruArgs();
 
     const run_step = b.step("run", "Run the app");
     run_step.dependOn(&run_cmd.step);
