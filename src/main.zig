@@ -9,10 +9,10 @@ extern fn nsapp_main(argc: c_int, argv: [*]const [:0]const u8) c_int;
 
 pub fn main(init: std.process.Init) !void {
     const minimal = init.minimal;
-    const allocator = init.arena.allocator();
+    const gpa = init.arena.allocator();
 
-    const stdout_buffer = try allocator.alloc(u8, 1024);
-    defer allocator.free(stdout_buffer);
+    const stdout_buffer = try gpa.alloc(u8, 1024);
+    defer gpa.free(stdout_buffer);
     var stdout_writer = File.stdout().writer(init.io, stdout_buffer);
     const stdout = &stdout_writer.interface;
 
@@ -20,7 +20,7 @@ pub fn main(init: std.process.Init) !void {
     try stdout.print("Copyright (C) 2015 Christian Mayer <https://fox21.at>\n", .{});
     try stdout.flush();
 
-    const args = try minimal.args.toSlice(allocator);
+    const args = try minimal.args.toSlice(gpa);
     const argc: c_int = @intCast(args.len);
     const argv = args.ptr;
     var args_iter = minimal.args.iterate();
