@@ -16,6 +16,11 @@ pub fn main(init: std.process.Init) !void {
     var stdout_writer = File.stdout().writer(init.io, stdout_buffer);
     const stdout = &stdout_writer.interface;
 
+    const stderr_buffer = try gpa.alloc(u8, 1024);
+    defer gpa.free(stderr_buffer);
+    var stderr_writer = File.stderr().writer(init.io, stderr_buffer);
+    const stderr = &stderr_writer.interface;
+
     try stdout.print("CmusControl " ++ VERSION ++ "\n", .{});
     try stdout.print("Copyright (C) 2015 Christian Mayer <https://fox21.at>\n", .{});
     try stdout.flush();
@@ -30,6 +35,10 @@ pub fn main(init: std.process.Init) !void {
     while (args_iter.next()) |arg| {
         if (eql(u8, arg, "-h") or eql(u8, arg, "--help")) {
             try printHelp(stdout);
+            return;
+        } else {
+            try stderr.print("ERROR: unknown argument: {s}\n", .{arg});
+            try stderr.flush();
             return;
         }
     }
