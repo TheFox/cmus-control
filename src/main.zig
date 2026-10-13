@@ -1,4 +1,4 @@
-const VERSION = "2.3.0-dev.2";
+const build_options = @import("build_options");
 const std = @import("std");
 const File = std.Io.File;
 const Writer = std.Io.Writer;
@@ -21,7 +21,7 @@ pub fn main(init: std.process.Init) !void {
     var stderr_writer = File.stderr().writer(init.io, stderr_buffer);
     const stderr = &stderr_writer.interface;
 
-    try stdout.print("CmusControl " ++ VERSION ++ "\n", .{});
+    try stdout.print("CmusControl " ++ build_options.VERSION ++ "\n", .{});
     try stdout.print("Copyright (C) 2015 Christian Mayer <https://fox21.at>\n", .{});
     try stdout.flush();
 

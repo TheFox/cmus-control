@@ -1,15 +1,11 @@
+const VERSION = "2.2.0-dev.2";
 const std = @import("std");
 const LazyPath = std.Build.LazyPath;
 const print = std.debug.print;
 const aprint = std.fmt.allocPrint;
 
 pub fn build(b: *std.Build) !void {
-    const version: std.SemanticVersion = .{ // VERSION
-        .major = 2,
-        .minor = 2,
-        .patch = 0,
-        .pre = "dev.2",
-    };
+    const version = try std.SemanticVersion.parse(VERSION);
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{
         .preferred_optimize_mode = .small,
@@ -21,6 +17,7 @@ pub fn build(b: *std.Build) !void {
     else
         aprint(b.allocator, "cmuscontrold", .{});
 
+    print("version: {s}\n", .{VERSION});
     print("target arch: {s}\n", .{@tagName(target.result.cpu.arch)});
     print("target cpu: {s}\n", .{target.result.cpu.model.name});
     print("target os: {s}\n", .{@tagName(target.result.os.tag)});
@@ -28,12 +25,16 @@ pub fn build(b: *std.Build) !void {
     print("optimize: {s}\n", .{@tagName(optimize)});
     print("build all: {any}\n", .{build_all});
 
+    const build_options = b.addOptions();
+    build_options.addOption([]const u8, "VERSION", VERSION);
+
     const exe_mod = b.createModule(.{
         .root_source_file = b.path("src/main.zig"),
         .target = target,
         .optimize = optimize,
         .strip = optimize != .debug,
     });
+    exe_mod.addOptions("build_options", build_options);
     exe_mod.addCSourceFiles(.{
         .files = &[_][]const u8{
             "src/main.m",
