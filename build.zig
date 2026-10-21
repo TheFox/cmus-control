@@ -1,4 +1,4 @@
-const VERSION = "2.2.0-dev.2";
+const VERSION = "2.2.0-dev.3";
 const std = @import("std");
 const LazyPath = std.Build.LazyPath;
 const print = std.debug.print;
