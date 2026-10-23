@@ -1,7 +1,7 @@
 const VERSION = "2.2.0-dev.3";
 const std = @import("std");
 const LazyPath = std.Build.LazyPath;
-const print = std.debug.print;
+const dprint = std.debug.print;
 const aprint = std.fmt.allocPrint;
 
 pub fn build(b: *std.Build) !void {
@@ -17,13 +17,13 @@ pub fn build(b: *std.Build) !void {
     else
         aprint(b.allocator, "cmuscontrold", .{});
 
-    print("version: {s}\n", .{VERSION});
-    print("target arch: {s}\n", .{@tagName(target.result.cpu.arch)});
-    print("target cpu: {s}\n", .{target.result.cpu.model.name});
-    print("target os: {s}\n", .{@tagName(target.result.os.tag)});
-    print("target name: {s}\n", .{target_name});
-    print("optimize: {s}\n", .{@tagName(optimize)});
-    print("build all: {any}\n", .{build_all});
+    dprint("version: {s}\n", .{VERSION});
+    dprint("target arch: {s}\n", .{@tagName(target.result.cpu.arch)});
+    dprint("target cpu: {s}\n", .{target.result.cpu.model.name});
+    dprint("target os: {s}\n", .{@tagName(target.result.os.tag)});
+    dprint("target name: {s}\n", .{target_name});
+    dprint("optimize: {s}\n", .{@tagName(optimize)});
+    dprint("build all: {any}\n", .{build_all});
 
     const build_options = b.addOptions();
     build_options.addOption([]const u8, "VERSION", VERSION);
